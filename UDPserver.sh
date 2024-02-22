@@ -638,7 +638,7 @@ make_service(){
 
 cat <<EOF > /etc/systemd/system/UDPserver.service
 [Unit]
-Description=UDPserver Service by @Rufu99
+Description=UDPserver Service by DarkBD
 After=network.target
 
 [Service]
@@ -664,26 +664,26 @@ EOF
 }
 
 install_UDP(){
-	title "${a16:-INSTALACION UDPserver}"
+	title "${a16:-INSTALL UDPserver}"
   exclude
 	download_udpServer
 	if [[ $(type -p udpServer) ]]; then
 		make_service
 		msg -bar3
 		if [[ $(systemctl is-active UDPserver) = 'active' ]]; then
-			print_center -verd "${a17:-instalacion completa}"
+			print_center -verd "${a17:-installation complete}"
 		else
-			print_center -verm2 "${a18:-falla al ejecutar el servicio}"
+			print_center -verm2 "${a18:-failure to run service}"
 		fi
 	else
 		echo
-		print_center -ama "${a19:-Falla al descargar el binario udpServer}"
+		print_center -ama "${a19:-Failure to download udpServer binary}"
 	fi
 	enter	
 }
 
 uninstall_UDP(){
-	title "${a32:-DESINTALADOR UDPserver}"
+	title "${a32:-DESINTALLER UDPserver}"
 	read -rp " $(msg -ama "${a33:-QUIERE DISINSTALAR UDPserver? [S/N]}:") " -e -i S UNINS
 	[[ $UNINS != @(Y|y|S|s) ]] && return
 	systemctl stop UDPserver &>/dev/null
@@ -691,7 +691,7 @@ uninstall_UDP(){
 	rm -rf /etc/systemd/system/UDPserver.service
 	rm -rf /usr/bin/udpServer
 	del 1
-	print_center -ama "${a34:-desinstalacion completa!}"
+	print_center -ama "${a34:-complete uninstall!}"
 	enter
 }
 
@@ -699,14 +699,14 @@ reset(){
 	if [[ $(systemctl is-active UDPserver) = 'active' ]]; then
 		systemctl stop UDPserver &>/dev/null
 		systemctl disable UDPserver &>/dev/null
-		print_center -ama "${a35:-UDPserver detenido!}"
+		print_center -ama "${a35:-UDPserver detect!}"
 	else
 		systemctl start UDPserver &>/dev/null
 		if [[ $(systemctl is-active UDPserver) = 'active' ]]; then
 			systemctl enable UDPserver &>/dev/null
-			print_center -verd "${a36:-UDPserver iniciado!}"
+			print_center -verd "${a36:-UDPserver started!}"
 		else
-			print_center -verm2 "${a37:-falla al inciar UDPserver!}"
+			print_center -verm2 "${a37:-Failed to start UDP server!}"
 		fi	
 	fi
 	enter
@@ -715,7 +715,7 @@ reset(){
 #==========================================
 
 QUIC_SCRIPT(){
-	title "${a38:-DESINSTALADOR SCRIPT UDPserver}"
+	title "${a38:-SCRIPT UNINSTALLER UDPserver}"
 	read -rp " $(msg -ama "${a39:-QUIERE DISINSTALAR EL SCRIPT UDPserver? [S/N]}:") " -e -i N UNINS
 	[[ $UNINS != @(Y|y|S|s) ]] && return
 	systemctl disable UDPserver &>/dev/null
@@ -724,12 +724,12 @@ QUIC_SCRIPT(){
 	rm /usr/bin/udpServer
 	rm /usr/bin/udp
 	rm -rf $udp_file
-	title "${a40:-DESINSTALACION COMPLETA}"
+	title "${a40:-UNINSTALLATION COMPLETE}"
 	time_reboot 10
 }
 
 exclude(){
-  title "${a20:-Excluir puertos UDP}"
+  title "${a20:-Exclude UDP ports}"
   print_center -ama "${a21:-UDPserver cubre el rango total de puertos.}"
   print_center -ama "${a22:-puedes excluir puertos UDP}"
   msg -bar3
@@ -863,7 +863,7 @@ quit_exclude(){
 }
 
 menu_udp(){
-	title "${a1:-SCRIPT DE CONFIGRACION UDPserver} BY @Rufu99"
+	title "${a1:-SCRIPT DE CONFIGRACION UDPserver} BY DarkBD"
 	print_center -ama 'UDPserver Binary by team newtoolsworks'
 	print_center -ama 'UDPclient Android SocksIP'
 	msg -bar
